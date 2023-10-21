@@ -12,6 +12,9 @@ Every new Microsoft Entra directory comes with an initial domain name, for examp
 
 For example, if my login name is `krishna@gmail.com` then my subscription name will be `krishnagmail-onmicrosoft-com`.
 
+<details>
+<summary><i>Azure Subscription & Resource Group</i></summary>
+
 ## Azure Subscription
 
 Logical grouping of Azure resources. You can have multiple subscriptions per account.
@@ -83,6 +86,8 @@ All interactions with Azure resources are go through ARM. It is the main Azure A
 ![](images/azure-arm.png)
 
 ![](images/azure-arm-benefits.png)
+
+</details>
 
 <details>
 <summary><i>Azure vs AWS</i></summary>
