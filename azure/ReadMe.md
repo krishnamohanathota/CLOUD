@@ -1,42 +1,5 @@
-## Microsoft Entra ID
-
-Microsoft Entra ID is a cloud-based identity and access management(IAM) service that enables your employees access external resources. Example resources include Microsoft 365, the Azure portal, and thousands of other SaaS applications.
-
-## Azure tenant
-
-A dedicated and trusted instance of `Microsoft Entra ID`. The tenant is automatically created when your organization signs up for a Microsoft cloud service subscription. These subscriptions include Microsoft Azure, Microsoft Intune, or Microsoft 365. An Azure tenant represents a single organization.
-
-## Microsoft Entra directory
-
-Every new Microsoft Entra directory comes with an initial domain name, for example `domainname.onmicrosoft.com`. In addition to that initial name, you can also add your organization's domain names. Your organization's domain names include the names you use to do business and your users use to access your organization's resources, to the list. Adding custom domain names helps you to create user names that are familiar to your users, such as alain@contoso.com.
-
-For example, if my login name is `krishna@gmail.com` then my subscription name will be `krishnagmail-onmicrosoft-com`.
-
 <details>
 <summary><i>Azure Subscription & Resource Group</i></summary>
-
-## Azure Subscription
-
-Logical grouping of Azure resources. You can have multiple subscriptions per account.
-
-Used to pay for Azure cloud services. You can have multiple subscriptions and they're linked to a credit card.
-
-Each subscription has limits or quotas on the amount of resources it can use. You can change the limits by contacting Microsoft Support.
-
-Security and billing boundaries for Azure resources.
-
-`Direcctory` is my tenant. It is a container for all the users, groups, and applications in an organization. It is also an instance of Azure AD. It is also known as Azure AD Tenant.
-
-What is Tenant ID?
-
-- It is a unique identifier for your Azure AD Tenant. It is a GUID. It is also known as Directory ID.
-
-### Azure Subscription Types
-
-- Free Trial
-- Pay-As-You-Go
-
-![](images/azure-subscription.png)
 
 ## Resource Group
 
@@ -423,9 +386,13 @@ Disadvantages :
 
 - Expensive. You pay for the promise of low latency and high availability.
 
+![](images/database/azure-cosmos-db.png)
+
 ## Azure SQL Database
 
-Azure SQL Database is a fully managed relational database
+Azure SQL Database is a fully managed relational database.
+
+Fully Managed and using the latest stable version of `SQL Server Database` Engine.
 
 You can migrate your existing `SQL Server databases` to Azure SQL Database without changing the application code. Azure SQL Database is a general-purpose relational database-as-a-service (DBaaS) based on the latest stable version of Microsoft SQL Server Database Engine. SQL Database is a high-performance, reliable, and secure database you can use to build data-driven applications and websites in the programming language of your choice, without needing to manage infrastructure.
 
@@ -440,7 +407,112 @@ Azure SQL Managed Instance (SQL MI) : To reduce the gap between the on-primes SQ
 
 Azure SQL Database : Azure SQL Database is a fully managed relational database with built-in intelligence supporting self-driving features such as performance tuning and threat alerts. Microsoft handles all patching and updating of the code base, but Azure SQL Database does not provide access to the underlying operating system or to SQL Server itself.
 
-![](images/database/azure-databases.png)
-![](images/database/azure-databases1.png)
+![](images/database/azure-databases.jpeg)
+![](images/database/azure-databases1.jpeg)
+![](images/database/azure-databases2.png)
+
+## Azure Database for MySQL
+
+Azure Database for MySQL is a fully managed database service for app developers. MySQL is the world's most popular open-source database. The MySQL Community edition helps you easily lift and shift to the cloud, using languages and frameworks of your choice.
+
+## Azure Database for PostgreSQL
+
+Azure Database for PostgreSQL is a fully managed database as a service offering capable of handling mission-critical workloads with predictable performance and dynamic scalability. It combines the power of community PostgreSQL, with the capabilities of Azure, providing a managed database service for app development and deployment with minimal administration.
+
+- Horizontal scaling with Hyperscale (Citus) : Hyperscale (Citus) is a built-in option in Azure Database for PostgreSQL that scales out your data across multiple nodes and can be used to achieve high performance and scale. Hyperscale (Citus) is a good fit for multi-tenant applications, SaaS applications, and applications that require real-time analytics over large datasets.
+
+</details>
+
+<details>
+<summary><i>Azure Active Directory (AAD) - Microsoft Entra ID</i></summary>
+
+## Azure Active Directory (AAD) - Microsoft Entra ID
+
+Azure Active Directory (Azure AD), now known as `Microsoft Entra ID`, is an identity and access management solution from Microsoft that helps organizations secure and manage identities for hybrid and multicloud environments.
+
+Microsoft Entra ID is a cloud-based identity and access management`(IAM)` service that enables your employees access external resources. Example resources include Microsoft 365, the Azure portal, and thousands of other SaaS applications.
+
+Azure Active Directory (Azure AD) is Microsoft's cloud-based identity and access management service, which helps your employees sign in and access resources in:
+
+- External resources, such as Microsoft 365, the Azure portal, and thousands of other SaaS applications.
+- Internal resources, such as apps on your corporate network and intranet, along with any cloud apps developed by your own organization.
+
+- You can't have Azure account withjout Azure AD service.
+- First user : Every azure account needs a first user and this user is in the initial AAD instance. This user is called the `Global Administrator`.
+
+![](images/ad/azure-ad.png)
+
+![](images/ad/azure-entraid.png)
+
+## Active Directory
+
+**Traditional office use** : Active directory was designed for traditional office use with computers and printers on a corporate network.
+
+- It wasn't designed for the web
+- Webservices were not part of the original vision for Active Directory in 2000
+
+## Tenant
+
+A dedicated and trusted instance of `Microsoft Entra ID`. The tenant is automatically created when your organization signs up for a Microsoft cloud service subscription. These subscriptions include Microsoft Azure, Microsoft Intune, or Microsoft 365.
+
+- An Azure tenant represents a single organization.
+- Each Tenant has a unique ID & domain name.
+- Each Tenant is distinct and completely separate from other Tenants.
+- Each user in Azure can only belong to one Tenant. A user cannot be shared across Tenants. However, users can be guests in other Tenants (can be a guest of 499 other Tenants)
+
+`Directory` is my tenant. It is a container for all the users, groups, and applications in an organization. It is also an instance of Azure AD. It is also known as Azure AD Tenant.
+
+### What is Tenant ID?
+
+- It is a unique identifier for your Azure AD Tenant. It is a GUID. It is also known as Directory ID.
+
+## Azure Subscription
+
+Logical grouping of Azure resources. You can have multiple subscriptions per account.
+
+Used to pay for Azure cloud services. You can have multiple subscriptions and they're linked to a credit card.
+
+Each subscription has limits or quotas on the amount of resources it can use. You can change the limits by contacting Microsoft Support.
+
+Security and billing boundaries for Azure resources.
+
+- Billing Entity : All resources within a subscription are billed together.
+- Cost Separation : You can use subscriptions to separate costs, such as by department or project. You can have multiple subscriptions within a tenant to separate costs.
+- Access Control : You can use subscriptions to control access to resources. You can grant access to a subscription to users, groups, and applications.
+
+### Azure Subscription Types
+
+- Free Trial
+- Pay-As-You-Go
+
+![](images/azure-subscription.png)
+
+## Microsoft Entra directory
+
+Every new Microsoft Entra directory comes with an initial domain name, for example `domainname.onmicrosoft.com`. In addition to that initial name, you can also add your organization's domain names. Your organization's domain names include the names you use to do business and your users use to access your organization's resources, to the list. Adding custom domain names helps you to create user names that are familiar to your users, such as alain@contoso.com.
+
+For example, if my login name is `krishna@gmail.com` then my subscription name will be `krishnagmail-onmicrosoft-com`.
+
+## Azure Active Directory B2B
+
+Azure Active Directory (Azure AD) business-to-business (B2B) collaboration lets you securely share your company's applications and services with guest users from any other organization, while maintaining control over your own corporate data. You can also use B2B collaboration to allow your employees to share your company's applications and services securely with users from other organizations without needing to manage external user identities.
+
+## Azure Active Directory Domain Services (AADDS)
+
+Managed AD. Provides all classic AD features without the need to manage it yourself.
+
+For Larger organisations, one of the largest barriers to full cloud adaptation is how to properly integrate old applications with modern cloud services.
+
+Older applications are unable to use the latest authentication methods, such as OAuth2.0 are not able properly integrate or authentocate with Azure AD.
+
+These legacy applications requires a tradional Active Directory Domain Services (AD DS) management / protocols which includes a classic Active directory features such as domain join, group policy, LDAP, and Kerberos/NTLM authentication.
+
+How to solve this problem?
+
+- Azure AD Connect : Continue using your on-premises AD and sync it with Azure AD.
+- Self managed AD DS : Create a new AD server on Azure VM and manage it yourself.
+- Azure Active Directory Domain Services (AADDS) : `Managed` AD DS. Provides all classic AD features without the need to manage it yourself.
+
+For Larger organisations, one of the challenges of moving to the cloud is the need to manage user identities and credentials in two places. Azure Active Directory Domain Services (Azure AD DS) provides managed domain services such as domain join, group policy, LDAP, and Kerberos/NTLM authentication that are fully compatible with Windows Server Active Directory. You can consume these domain services without the need to deploy, manage, and patch domain controllers in the cloud. Azure AD DS integrates with your existing Azure AD tenant, thus making it possible for users to log in using their corporate credentials.
 
 </details>
