@@ -183,70 +183,7 @@ All interactions with Azure resources are go through ARM. It is the main Azure A
 
 </details>
 
-[Organization/Tenant/Azure AD Instance/Azure AD Directory]  
-↕  
-[Root Management Group]  
-↓↓↓  
-[(0 or more) Management Group]  
-↓↓↓  
-[Subscription]  
-↓↓↓  
-[Resource Group]  
-↓↓↓  
-[Resource]
-
-- ↕ denotes a one-to-one correspondence.
-- ↓↓↓ is meant to denote a 'one-to-many' relationship
-
-![](images/az-scopes-billing.png)
-
-<details>
-<summary><i>Azure vs AWS</i></summary>
-
-## Azure vs AWS
-
-| Azure                                | AWS                                                              |
-| ------------------------------------ | ---------------------------------------------------------------- |
-| Virtual Machines (IaaS)              | EC2                                                              |
-| AppServices (PaaS)                   | Elastic Beanstalk                                                |
-| Azure Functions                      | Lambda                                                           |
-| NetWork Security Groups(NSGs)        | Security Groups                                                  |
-| Virtual Networks or VNet             | Virtual Private Clouds(VPCs)                                     |
-| Virtual Machine Scale Sets(VMSS)     | Auto Scaling Groups                                              |
-| --------------------------------     | -------------------------------                                  |
-| Azure Conatiner Instances(ACI)       | Elastic Container Service (ECS)                                  |
-| Azure Kubernetes Service(AKS)        | Elastic Kubernetes Service(EKS)                                  |
-| Azure Container Registry(ACR)        | Elastic Container Registry(ECR)                                  |
-| --------------------------------     | -------------------------------                                  |
-| Azure Virtual Desktop(AVD)           | Amazon WorkSpaces                                                |
-| Azure Content Delivery Network (CDN) | CloudFront                                                       |
-| ExpressRoute                         | Direct Connect                                                   |
-| --------------------------------     | -------------------------------                                  |
-| Azure Blob Storage                   | Amazon S3                                                        |
-| Azure Archive Storage                | Amazon S3 Glacier                                                |
-| Azure Blob Storage Cool Tier         | Amazon S3 Standard-Infrequent Access                             |
-| Azure Disk Storage                   | Amazon EBS                                                       |
-| Azure File Storage                   | Amazon EFS                                                       |
-| Azure Data Box                       | AWS Snowball                                                     |
-| Azure File Sync                      | AWS Storage Gateway                                              |
-| Azcopy                               | AWS DataSync                                                     |
-| Azure Storage Explorer               | AWS Management Console                                           |
-| Azure Migrate                        | AWS Application Discovery Service & AWS Server Migration Service |
-| --------------------------------     | -------------------------------                                  |
-| Azure Web Application Firewall(WAF)  | AWS Web Application Firewall(WAF)                                |
-| Azure Monitor                        | CloudWatch                                                       |
-| Azure Active Directory               | AWS IAM                                                          |
-| --------------------------------     | -------------------------------                                  |
-| Azure Load Balancer                  | Elastic Load Balancer(ELB)                                       |
-| Application Gateway                  | AWS Application Load Balancer                                    |
-| --------------------------------     | -------------------------------                                  |
-| Azure API Management                 | API Gateway                                                      |
-| Azure SQL Database                   | Amazon RDS                                                       |
-| Azure Database for MySQL             | Amazon Aurora                                                    |
-| Azure Cosmos DB                      | DynamoDB                                                         |
-| Azure DNS                            | Route 53                                                         |
-
-</details>
+## Azure Resources
 
 <details>
 <summary><i>Azure Compute</i></summary>
@@ -568,5 +505,77 @@ Azure Database for MySQL is a fully managed database service for app developers.
 Azure Database for PostgreSQL is a fully managed database as a service offering capable of handling mission-critical workloads with predictable performance and dynamic scalability. It combines the power of community PostgreSQL, with the capabilities of Azure, providing a managed database service for app development and deployment with minimal administration.
 
 - Horizontal scaling with Hyperscale (Citus) : Hyperscale (Citus) is a built-in option in Azure Database for PostgreSQL that scales out your data across multiple nodes and can be used to achieve high performance and scale. Hyperscale (Citus) is a good fit for multi-tenant applications, SaaS applications, and applications that require real-time analytics over large datasets.
+
+</details>
+
+## Other
+
+<details>
+<summary><i>Azure Account Structure</i></summary>
+
+[Organization/Tenant/Azure AD Instance/Azure AD Directory]  
+↕  
+[Root Management Group]  
+↓↓↓  
+[(0 or more) Management Group]  
+↓↓↓  
+[Subscription]  
+↓↓↓  
+[Resource Group]  
+↓↓↓  
+[Resource]
+
+- ↕ denotes a one-to-one correspondence.
+- ↓↓↓ is meant to denote a 'one-to-many' relationship
+
+![](images/az-scopes-billing.png)
+
+</details>
+
+<details>
+<summary><i>Azure vs AWS</i></summary>
+
+## Azure vs AWS
+
+| Azure                                | AWS                                                              |
+| ------------------------------------ | ---------------------------------------------------------------- |
+| Virtual Machines (IaaS)              | EC2                                                              |
+| AppServices (PaaS)                   | Elastic Beanstalk                                                |
+| Azure Functions                      | Lambda                                                           |
+| NetWork Security Groups(NSGs)        | Security Groups                                                  |
+| Virtual Networks or VNet             | Virtual Private Clouds(VPCs)                                     |
+| Virtual Machine Scale Sets(VMSS)     | Auto Scaling Groups                                              |
+| --------------------------------     | -------------------------------                                  |
+| Azure Conatiner Instances(ACI)       | Elastic Container Service (ECS)                                  |
+| Azure Kubernetes Service(AKS)        | Elastic Kubernetes Service(EKS)                                  |
+| Azure Container Registry(ACR)        | Elastic Container Registry(ECR)                                  |
+| --------------------------------     | -------------------------------                                  |
+| Azure Virtual Desktop(AVD)           | Amazon WorkSpaces                                                |
+| Azure Content Delivery Network (CDN) | CloudFront                                                       |
+| ExpressRoute                         | Direct Connect                                                   |
+| --------------------------------     | -------------------------------                                  |
+| Azure Blob Storage                   | Amazon S3                                                        |
+| Azure Archive Storage                | Amazon S3 Glacier                                                |
+| Azure Blob Storage Cool Tier         | Amazon S3 Standard-Infrequent Access                             |
+| Azure Disk Storage                   | Amazon EBS                                                       |
+| Azure File Storage                   | Amazon EFS                                                       |
+| Azure Data Box                       | AWS Snowball                                                     |
+| Azure File Sync                      | AWS Storage Gateway                                              |
+| Azcopy                               | AWS DataSync                                                     |
+| Azure Storage Explorer               | AWS Management Console                                           |
+| Azure Migrate                        | AWS Application Discovery Service & AWS Server Migration Service |
+| --------------------------------     | -------------------------------                                  |
+| Azure Web Application Firewall(WAF)  | AWS Web Application Firewall(WAF)                                |
+| Azure Monitor                        | CloudWatch                                                       |
+| Azure Active Directory               | AWS IAM                                                          |
+| --------------------------------     | -------------------------------                                  |
+| Azure Load Balancer                  | Elastic Load Balancer(ELB)                                       |
+| Application Gateway                  | AWS Application Load Balancer                                    |
+| --------------------------------     | -------------------------------                                  |
+| Azure API Management                 | API Gateway                                                      |
+| Azure SQL Database                   | Amazon RDS                                                       |
+| Azure Database for MySQL             | Amazon Aurora                                                    |
+| Azure Cosmos DB                      | DynamoDB                                                         |
+| Azure DNS                            | Route 53                                                         |
 
 </details>
