@@ -29,3 +29,7 @@ With cloud-native development, updates and new functionality can be pushed live 
 **Key principles of cloud-native development**
 
 ![](images/cloud-native-principles.png)
+
+## SLA Calculation
+
+https://uptime.is/
