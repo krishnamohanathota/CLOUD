@@ -26,7 +26,7 @@ Azure Active Directory (Azure AD) is Microsoft's cloud-based identity and access
 - It wasn't designed for the web
 - Webservices were not part of the original vision for Active Directory in 2000
 
-## Tenant
+## Tenant (Directory)
 
 A dedicated and trusted instance of `Microsoft Entra ID`. The tenant is automatically created when your organization signs up for a Microsoft cloud service subscription. These subscriptions include Microsoft Azure, Microsoft Intune, or Microsoft 365.
 
@@ -37,18 +37,18 @@ A dedicated and trusted instance of `Microsoft Entra ID`. The tenant is automati
 
 `Directory` is my tenant. It is a container for all the users, groups, and applications in an organization. It is also an instance of Azure AD. It is also known as Azure AD Tenant.
 
-In general, an Azure AD tenant name ends with ‘onmicrosoft.com’, for example – atcsl.onmicrosoft.com, where ‘atcsl’ may be the name of an individual or an organization. In essence, a single tenant corresponds to a single instance of Azure Active Directory.
+In general, an Azure AD tenant name ends with ‘onmicrosoft.com’, for example – abc.onmicrosoft.com, where ‘abc’ may be the name of an individual or an organization. In essence, a single tenant corresponds to a single instance of Azure Active Directory.
 
 Although when an organization or an individual signs up for the first time, only a single tenant is created and associated, but multiple tenants can be created after signing up and, therefore, an `organization` can have more than one tenant, depending upon organizational requirement. Each tenant has its own Azure Active Directory, thereby having a one-to-one relation between the tenant and the Azure AD, where each tenant is referred to as an organization.
 
-Let’s try to understand that with an example. There is a holding company called Globomantics. This company decides to have 2 different tenants for its 2 subsidiaries.
+Let’s try to understand that with an example. There is a holding company called XYZ. This company decides to have 2 different tenants for its 2 subsidiaries.
 
 - one tenant for subsidiary Contoso having subscriptions for Dev and Prod, and
 - one tenant for subsidiary Fabrikam, again having subscriptions for Dev and Prod
 
 ![](images/ad/azure-multi-tenant.png)
 
-These two tenants may be required based on Globomantics internal organizational requirements in order to have maximum separation of concerns as well as have different settings and configurations for the two subsidiaries, which can be based on different geographies or regions.
+These two tenants may be required based on XYZ internal organizational requirements in order to have maximum separation of concerns as well as have different settings and configurations for the two subsidiaries, which can be based on different geographies or regions.
 
 As shown in the image above, a Tenant can have one or more subscriptions. This is the case in large organization, where there are different departments and each department has their own subscription, whereas, a Subscription can only be associated with a single Azure AD Tenant at any time.
 
@@ -101,6 +101,19 @@ The first management group created in the directory could take up to `15 minutes
 
 If your organization has many Azure subscriptions, you may need a way to efficiently manage access, policies, and compliance for those subscriptions. Management groups provide a governance scope above subscriptions. You organize subscriptions into management groups; the governance conditions you apply cascade by inheritance to all associated subscriptions.
 
+- You use Management groups to model your organization
+- Management group can contain other management groups or subscriptions, but it cannot contain an Azure Resource.
+- Management groups and subscriptions can only support one parent
+- All subscriptions and management groups within a hierarchy share a common directory.
+- Management groups reside within a tenant and cannot contain subscriptions of different tenants.
+- A single directory can have up to 10,000 management groups
+
+### Root management group
+
+- All management groups in the Azure AD are under the root management group.
+- Root management group cannot be moved or deleted.
+- You can only have one root management group.
+
 </details>
 
 <details>
@@ -120,12 +133,22 @@ Security and billing boundaries for Azure resources.
 - Cost Separation : You can use subscriptions to separate costs, such as by department or project. You can have multiple subscriptions within a tenant to separate costs.
 - Access Control : You can use subscriptions to control access to resources. You can grant access to a subscription to users, groups, and applications.
 
+### Subscription Design Strategies
+
+- Workload separation strategy
+- Application category strategy
+- Mission-critical workloads
+- Functional strategy
+- Business unit strategy
+- Geographic strategy
+- Mix subscription strategies
+
 ### Azure Subscription Types
 
 - Free Trial
 - Pay-As-You-Go
 
-![](images/azure-subscription.png)
+![](images/subscriptions/azure-subscription.png)
 
 </details>
 
@@ -142,10 +165,12 @@ A logical container into which Azure resources like web apps, databases, and sto
 - Resource group is not a billing boundary. It is a management boundary.
 
 - Resource groups can be used to scope access control for administrative actions.
-- Resource groups can be used to scope billing.
+- Resource Groups can simplify reporting and billing within Subscription.
 - Resource groups can be used to scope RBAC permissions.
 - Resource groups can be used to scope Azure policies.
 - Each resource group can contain multiple resources.
+
+- Resource groups are the lowest level of organizational scope, and are the level that contains almost all Azure Resources.
 
 ### Resource Group Facts
 
@@ -177,9 +202,64 @@ All interactions with Azure resources are go through ARM. It is the main Azure A
 - ARM provides a common deployment model for all the Azure resources.
 - ARM provides a common billing model for all the Azure resources.
 
-![](images/azure-arm.png)
+![](images/arm/azure-arm1.png)
 
-![](images/azure-arm-benefits.png)
+![](images/arm/azure-arm2.png)
+
+![](images/arm/azure-arm.png)
+
+![](images/arm/azure-arm-benefits.png)
+
+</details>
+
+<details>
+<summary><i>Management Groups vs Subscriptions vs Resource Groups</i></summary>
+
+Azure Management Groups, Subscriptions, and Resource Groups are used together to establish the entire organizational structure in Azure, and they are designed to be flexible to organize Azure resources to meet business needs. This helps you efficiently manage access, policies, and compliance for the subscriptions.
+
+If your organization has many subscriptions, you may need a way to efficiently manage access, policies, and compliance for those subscriptions. `Azure management groups` provide a level of scope above subscriptions.
+
+To effectively organize `Azure resources`, define a hierarchy of management groups and subscriptions to which you can apply Azure Policy (and Initiative) and effectively manage the assignment of permissions via role-based access control (RBAC).
+
+| Subscriptions   | Resource Groups | Management Groups |
+| --------------- | --------------- | ----------------- |
+| Billing         | Management      | Management        |
+| Security        | Management      | Management        |
+| Access Control  | Management      | Management        |
+| Limits          | Management      | Management        |
+| Billing Entity  | Management      | Management        |
+| Cost Separation | Management      | Management        |
+
+![](images/subscriptions/azure-mg-subscription-rg1.png)
+![](images/subscriptions/azure-mg-subscription-rg2.png)
+
+#### Best Practices
+
+- Create separate Subscriptions/Management Groups for each Customer.
+- Create separate Subscriptions/Management Groups for each Project.
+- Create separate Subscriptions for different Environments (e.g. Dev, Stage, Prod).
+
+</details>
+
+<details>
+<summary><i>Azure Account Structure</i></summary>
+
+[Organization/Tenant/Azure AD Instance/Azure AD Directory]  
+↕  
+[Root Management Group]  
+↓↓↓  
+[(0 or more) Management Group]  
+↓↓↓  
+[Subscription]  
+↓↓↓  
+[Resource Group]  
+↓↓↓  
+[Resource]
+
+- ↕ denotes a one-to-one correspondence.
+- ↓↓↓ is meant to denote a 'one-to-many' relationship
+
+![](images/az-scopes-billing.png)
 
 </details>
 
@@ -508,37 +588,56 @@ Azure Database for PostgreSQL is a fully managed database as a service offering 
 
 </details>
 
-## Other
+## Azure Tips and Tricks
 
-<details>
-<summary><i>Azure Account Structure</i></summary>
+https://microsoft.github.io/AzureTipsAndTricks/
 
-[Organization/Tenant/Azure AD Instance/Azure AD Directory]  
-↕  
-[Root Management Group]  
-↓↓↓  
-[(0 or more) Management Group]  
-↓↓↓  
-[Subscription]  
-↓↓↓  
-[Resource Group]  
-↓↓↓  
-[Resource]
+## CLI
 
-- ↕ denotes a one-to-one correspondence.
-- ↓↓↓ is meant to denote a 'one-to-many' relationship
+[Getting Started with CLI after creating your virtual machine](https://www.youtube.com/watch?v=ZO7K5q5Vqrk&list=PLLasX02E8BPBKgXP4oflOL29TtqTzwhxR)
 
-![](images/az-scopes-billing.png)
+## How tos
 
-</details>
+[How to move your resources between resource groups](https://www.youtube.com/watch?v=8HVAP4giLdc&list=PLLasX02E8BPBKgXP4oflOL29TtqTzwhxR&index=15)
+
+[How to check your subscription’s secure score](https://www.youtube.com/watch?v=yqb3qvsjqXY&list=PLLasX02E8BPBKgXP4oflOL29TtqTzwhxR&index=9)
+
+## Pricing
+
+[azureprice.net](https://azureprice.net/) Find and compare Azure Virtual machines specs and pricing on a one page.
+
+[Price / Performance comparison](https://azureprice.net/performance)
+
+## Free Courses
+
+[OpenEdx Courses](https://openedx.microsoft.com/)
+
+## Guides - Free
+
+[The Developer's Guide to Azure](https://azure.microsoft.com/en-us/campaigns/developer-guide/)
+
+![Download](guides/TheDeveloper'sGuideToAzure.pdf)
+
+## Powershell Gallery
+
+[PowerShell Gallery](https://www.powershellgallery.com/profiles/azure-sdk/)
+
+## Resource
+
+https://www.youtube.com/@MicrosoftAzure
+
+https://github.com/kristofferandreasen/awesome-azure
 
 <details>
 <summary><i>Azure vs AWS</i></summary>
 
-## Azure vs AWS
-
 | Azure                                | AWS                                                              |
 | ------------------------------------ | ---------------------------------------------------------------- |
+| Azure Tenant                         | AWS Organizations                                                |
+| Azure Management Group               | AWS Organization Units (OU)                                      |
+| Azure Subscriptions                  | AWS Accounts                                                     |
+| Azure Resource Groups                | AWS Resource Groups                                              |
+| --------------------------------     | -------------------------------                                  |
 | Virtual Machines (IaaS)              | EC2                                                              |
 | AppServices (PaaS)                   | Elastic Beanstalk                                                |
 | Azure Functions                      | Lambda                                                           |
@@ -571,11 +670,13 @@ Azure Database for PostgreSQL is a fully managed database as a service offering 
 | --------------------------------     | -------------------------------                                  |
 | Azure Load Balancer                  | Elastic Load Balancer(ELB)                                       |
 | Application Gateway                  | AWS Application Load Balancer                                    |
+| Azure DNS                            | Route 53                                                         |
 | --------------------------------     | -------------------------------                                  |
 | Azure API Management                 | API Gateway                                                      |
 | Azure SQL Database                   | Amazon RDS                                                       |
 | Azure Database for MySQL             | Amazon Aurora                                                    |
 | Azure Cosmos DB                      | DynamoDB                                                         |
-| Azure DNS                            | Route 53                                                         |
+| --------------------------------     | -------------------------------                                  |
+| Azure Resource manager (ARM)         | CloudFormation                                                   |
 
 </details>
