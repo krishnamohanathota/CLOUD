@@ -734,6 +734,10 @@ https://microsoft.github.io/AzureTipsAndTricks/
 
 [Price / Performance comparison](https://azureprice.net/performance)
 
+[Virtual machines selector](https://azure.microsoft.com/en-gb/pricing/vm-selector/)
+
+[Virtual machine types / sizes](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes)
+
 ## Free Courses
 
 [OpenEdx Courses](https://openedx.microsoft.com/)
@@ -741,8 +745,6 @@ https://microsoft.github.io/AzureTipsAndTricks/
 ## Guides - Free
 
 [The Developer's Guide to Azure](https://azure.microsoft.com/en-us/campaigns/developer-guide/)
-
-![Download](guides/TheDeveloper'sGuideToAzure.pdf)
 
 ## Powershell Gallery
 
