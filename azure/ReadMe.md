@@ -588,6 +588,132 @@ Azure Database for PostgreSQL is a fully managed database as a service offering 
 
 </details>
 
+<details>
+<summary><i>Service EndPoints vs Private Link</i></summary>
+
+`Azure Service Endpoint` provides secure and direct connectivity to Azure PaaS services over an optimized route over the Azure backbone network. Traffic still left your VNet and hit the public endpoint of PaaS service.
+
+`Azure Private Link` (Private Endpoint) allows you to access Azure PaaS services over Private IP address within the VNet. It gets a new private IP on your VNet. When you send traffic to PaaS resource, it will always ensure traffic stays within your VNet.
+
+Use a private link, if you want to be able to block all internet traffic to a target resource.
+Private Link is superior to Service Endpoint in Security
+
+|                              | Service Endpoints                                                                              | Private Link                                                                                            |
+| ---------------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| Access                       | It remains a publicly routable IP address                                                      | It is a private IP in the address space of the virtual network where the private endpoint is configured |
+| Data Exfiltration protection | Traffic need to be passed through an NVA/Firewall for exfiltration protection.                 | It has an inbuilt data protection                                                                       |
+| On-Premise Connectivity      | it is not easily restrict on-premise traffic. They can only be secured to Azure VNet           | Easily extensible for On-premises network traffic via ExpressRoute or VPN tunnels                       |
+| Complexity                   | It’s much simpler to implement and significantly reduce complexity of your architecture design | Need to manage another resource                                                                         |
+| Cost                         | There is no additional cost for using VNet service endpoints.                                  | It costs can quickly grow depending on total ingress and egress traffic and runtime of the link.        |
+
+![](images/service-endpoints/without_service_endpoint.png)
+![](images/service-endpoints/with_service_endpoint.png)
+![](images/service-endpoints/private_link.png)
+
+</details>
+
+<details>
+<summary><i>App Services</i></summary>
+
+<details>
+<summary><i>VNet Integration</i></summary>
+
+</details>
+
+<details>
+
+<summary><i>Access Restrictions</i></summary>
+
+## Access Restrictions vs Network Security Groups (NSG)
+
+## Access Restrictions
+
+Access Restrictions is a feature of `App Service` that is closely integrated with Azure Virtual Networks. It allows you to define a set of rules that control which inbound traffic should be allowed to reach the app. The rules can be defined based on source IP address/subnet, or based on a Service Tag.
+
+## Network Security Groups (NSG)
+
+A network security group (NSG) contains a list of security rules that allow or deny network traffic to resources connected to Azure Virtual Networks (VNet). NSGs can be associated with either subnets or individual network interfaces attached to Azure Virtual Machines (VM).
+
+</details>
+
+</details>
+
+<details>
+<summary><i>Load Balancer</i></summary>
+
+## Azure Load Balancer
+
+Azure Load Balancer is a network load balancer that enables you to build highly scalable and highly available applications. Traditional load balancers operate at the transport layer (OSI layer 4 - TCP and UDP) and route traffic based on source IP address and port, to a destination IP address and port.
+
+- Great for internal resources
+- Don't use for external resources (Internet facing)
+- Don't support HTTP Traffic
+- Doesn't use route based on paths
+
+| Basic                        | Standard                               |
+| ---------------------------- | -------------------------------------- |
+| No redundancy                | Redundancy                             |
+| No Availability Zones        | Availability Zones                     |
+| Outbound rules not available | Declarative outbound NAT configuration |
+| Open by default              | Closed / Secured by default            |
+| No SLA                       | 99.99% SLA                             |
+| Upto 300 instances           | Upto 1000 instances                    |
+| Free                         | Paid                                   |
+
+### OSI Model
+
+![](images/osi-model.png)
+
+https://learn.microsoft.com/en-us/windows-hardware/drivers/network/windows-network-architecture-and-the-osi-model
+
+### LoadBalancer configuration
+
+![](images/lb/azure-lb-conf.png)
+
+Azure Load Balancer Health Probes source ip address is 168.63.129.16. This is a special IP address that is used by Azure to check the health of the VMs. In NSG, by default, all inbound traffic is allowed from this IP address.
+
+![](images/lb/azure-lb-conf2.jpeg)
+
+We can expose multiple public IP addresses for a single load balancer. This is called `IP Address Pooling`. This is useful when you want to expose multiple services on the same load balancer.
+
+![](images/lb/azure-lb-conf1.png)
+
+</details>
+
+<details>
+<summary><i>Application Gateway (Web Traffic Load Balancer)</i></summary>
+
+## Application Gateway
+
+Azure Application Gateway is a web traffic load balancer that enables you to manage traffic to your web applications. It is a reverse proxy service that works at the application layer (OSI layer 7) and provides application-level routing and load balancing services.
+
+- Great for external resources (Internet facing)
+- Supports HTTP Traffic
+- Supports route based on paths
+
+![](images/lb/azure-lb-ag.png)
+
+![](images/lb/azure-lb-ag1.jpeg)
+
+- WAF
+
+  Works Detection or Prevention mode.
+
+  - Detection mode : It will detect the attack and log it, but it will not block it.
+  - Prevention mode : It will detect the attack and block it.
+
+Application Gateway is available under a `Standard_v2` SKU.
+
+Web Application Firewall (WAF) is available under a `WAF_v2` SKU. Price is alsmost double of the Standard_v2 SKU.
+
+### Networking
+
+- Application Gateway is placed in its own subnet. It cannot be placed in the same subnet as the backend pool.
+- Application Gateway subnet must be named `AppGatewaySubnet`.
+- Backend resources should be allowed to receive traffic from the Application Gateway subnet.
+
+</details>
+
 ## Azure Tips and Tricks
 
 https://microsoft.github.io/AzureTipsAndTricks/
@@ -641,8 +767,6 @@ https://github.com/kristofferandreasen/awesome-azure
 | Virtual Machines (IaaS)              | EC2                                                              |
 | AppServices (PaaS)                   | Elastic Beanstalk                                                |
 | Azure Functions                      | Lambda                                                           |
-| NetWork Security Groups(NSGs)        | Security Groups                                                  |
-| Virtual Networks or VNet             | Virtual Private Clouds(VPCs)                                     |
 | Virtual Machine Scale Sets(VMSS)     | Auto Scaling Groups                                              |
 | --------------------------------     | -------------------------------                                  |
 | Azure Conatiner Instances(ACI)       | Elastic Container Service (ECS)                                  |
@@ -678,5 +802,11 @@ https://github.com/kristofferandreasen/awesome-azure
 | Azure Cosmos DB                      | DynamoDB                                                         |
 | --------------------------------     | -------------------------------                                  |
 | Azure Resource manager (ARM)         | CloudFormation                                                   |
+| --------------------------------     | -------------------------------                                  |
+| Virtual Networks or VNet             | Virtual Private Clouds(VPCs)                                     |
+| NetWork Security Groups(NSGs)        | Security Groups                                                  |
+| Service End Points                   | VPC End Points                                                   |
+| Private Link                         | VPC Private Link                                                 |
+| --------------------------------     | -------------------------------                                  |
 
 </details>
