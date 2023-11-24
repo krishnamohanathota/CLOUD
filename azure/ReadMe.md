@@ -303,9 +303,9 @@ Vnet belongs to a single Azure region. Every resource in a Vnet belongs to the s
 
 Vnet belongs to a single subscription. Every resource in a Vnet belongs to the same subscription. A resource in one subscription cannot be added to a Vnet in another subscription.
 
-Vnet can be connected to other Vnets in the same region or in different regions. This is called `Vnet peering`.
+`Vnet peering` : Vnet can be connected to other Vnets in the same region or in different regions.
 
-Vnet can be connected to on-premises networks. This is called `Vnet gateway`.
+`Vnet gateway` : Vnet can be connected to on-premises networks. This is called.
 
 ### Advantages of VNet
 
@@ -313,6 +313,15 @@ Vnet can be connected to on-premises networks. This is called `Vnet gateway`.
 - VNet provides control over IP address ranges, DNS settings, security policies, and route tables within a network.
 - VNet provides a way to connect Azure resources to each other and to on-premises networks.
 - VNet provides a way to connect Azure resources to the internet.
+
+### Best Practices
+
+- Create separate Vnets for different environments (e.g. Dev, Stage, Prod).
+- Create separate Vnets for different projects.
+- Ensure nonoverlapping address spaces. Make sure your virtual network address space (CIDR block) doesn't overlap with your organization's other network ranges.
+- Your subnets shouldn't cover the entire address space of the virtual network. Plan ahead and reserve some address space for the future.
+- It's recommended you have fewer large virtual networks rather than multiple small virtual networks to prevent management overhead.
+- Secure your virtual networks by assigning Network Security Groups (NSGs) to the subnets beneath them.
 
 ### Subnet
 
