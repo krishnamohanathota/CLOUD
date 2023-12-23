@@ -306,7 +306,7 @@ A role assignment is the process of attaching a role definition to a user, group
 
 A role assignment consists of three elements: a security principal, a role definition, and a scope. A role assignment grants access to Azure resources. A role assignment can only grant access, not deny access.
 
-The following diagram shows an example of a role assignment. In this example, the Marketing group has been assigned the Contributor role for the pharma-sales resource group. This means that users in the Marketing group can create or manage any Azure resource in the pharma-sales resource group. Marketing users do not have access to resources outside the pharma-sales resource group, unless they are part of another role assignment.
+The following diagram shows an example of a role assignment. In this example, the `Marketing group` has been assigned the `Contributor role` for the pharma-sales resource group. This means that users in the Marketing group can create or manage any Azure resource in the pharma-sales resource group. Marketing users do not have access to resources outside the pharma-sales resource group, unless they are part of another role assignment.
 
 ![](images/rbac/azure-rbac-role-assignment.png)
 
