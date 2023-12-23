@@ -202,6 +202,16 @@ All interactions with Azure resources are go through ARM. It is the main Azure A
 - ARM provides a common deployment model for all the Azure resources.
 - ARM provides a common billing model for all the Azure resources.
 
+Azure Resource Manager provides several benefits:
+
+- You can deploy, manage, and monitor all the resources for your solution as a group, rather than handling these resources individually.
+- You can repeatedly deploy your solution throughout the development lifecycle and have confidence your resources are deployed in a consistent state.
+- You can manage your infrastructure through declarative templates rather than scripts.
+- You can define the dependencies between resources so they're deployed in the correct order.
+- You can apply access control to all services in your resource group because Role-Based Access Control (RBAC) is natively integrated into the management platform.
+- You can apply tags to resources to logically organize all the resources in your subscription.
+- You can clarify your organization's billing by viewing costs for a group of resources sharing the same tag.
+
 ![](images/arm/azure-arm1.png)
 
 ![](images/arm/azure-arm2.png)
@@ -260,6 +270,91 @@ To effectively organize `Azure resources`, define a hierarchy of management grou
 - ↓↓↓ is meant to denote a 'one-to-many' relationship
 
 ![](images/az-scopes-billing.png)
+
+</details>
+
+<details>
+<summary><i>Azure RBAC (Role-based access control)</i></summary>
+
+## Azure RBAC
+
+Azure RBAC is an authorization system built on Azure Resource Manager that provides fine-grained access management to Azure resources, such as compute and storage.
+
+Azure Role-Based Access Control (Azure RBAC) is the authorization system you use to manage access to Azure resources. To grant access, you assign roles to users, groups, service principals, or managed identities at a particular scope.
+
+### Security Principal
+
+A security principal is an object that represents a user, group, service principal, or managed identity that is requesting access to Azure resources. Security principals are used in role assignments to determine access rights to Azure resources.
+
+![](images/rbac/azure-rbac-sp.png)
+
+### Role Definition
+
+A role definition is a collection of permissions (Role). A role definition lists the operations that can be performed, such as read, write, and delete. Roles can be high-level, like owner, or specific, like virtual machine reader.
+
+![](images/rbac/azure-rbac-role.png)
+
+### Scope
+
+The scope of a role assignment can be a subscription, resource group, or resource. A role assigned to a parent scope also propagates to all child scopes. For example, a role assignment made at the subscription scope is inherited by all resource groups and resources in the subscription.
+
+![](images/rbac/azure-rbac-scope.png)
+
+### Role Assignment
+
+A role assignment is the process of attaching a role definition to a user, group, service principal, or managed identity at a particular scope for the purpose of granting access. Access is granted by creating a role assignment, and access is revoked by removing a role assignment.
+
+A role assignment consists of three elements: a security principal, a role definition, and a scope. A role assignment grants access to Azure resources. A role assignment can only grant access, not deny access.
+
+The following diagram shows an example of a role assignment. In this example, the Marketing group has been assigned the Contributor role for the pharma-sales resource group. This means that users in the Marketing group can create or manage any Azure resource in the pharma-sales resource group. Marketing users do not have access to resources outside the pharma-sales resource group, unless they are part of another role assignment.
+
+![](images/rbac/azure-rbac-role-assignment.png)
+
+### Azure Roles
+
+Azure RBAC includes over 100 built-in roles. As shown in the below image, there are five fundamental Azure roles. The rest of the built-in roles allow management of specific Azure resources. For example, the `Virtual Machine Contributor` role allows the user to create and manage virtual machines. In the below image, the first three apply to all resource types :
+
+![](images/rbac/azure-rbac-roles.png)
+
+### Microsoft Entra roles
+
+Microsoft Entra roles are the roles that are used to manage Azure AD resources. These roles are different from Azure RBAC roles. Azure AD roles are used to manage Azure AD resources, such as users, groups, and domains. Azure AD roles are assigned to users, groups, and service principals at a particular scope. Azure AD roles are different from Azure RBAC roles, which are used to manage Azure resources.
+
+![](images/rbac/entra-roles.png)
+
+### Azure roles vs Microsoft Entra roles vs Classic subscription administrator roles
+
+- `Classic subscription roles` : When Azure was initially released, access to resources was managed with just three administrator roles: Account Administrator, Service Administrator, and Co-Administrator
+- Later, Azure role-based access control (Azure RBAC) was added. `Azure RBAC` is a newer authorization system that provides fine-grained access management to Azure resources. Azure RBAC includes many built-in roles, can be assigned at different scopes, and allows you to create your own custom roles.
+- To manage resources in `Microsoft Entra ID`, such as users, groups, and domains, there are several Microsoft Entra roles.
+
+![](images/rbac/azure-rbac-vs-entra-roles.png)
+
+| Azure RBAC Roles                                                                                     | Microsoft Entra Roles                                                                                                                                 |
+| ---------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Built-in roles                                                                                       | Built-in roles                                                                                                                                        |
+| Custom roles                                                                                         | Custom roles                                                                                                                                          |
+| Manage access to Azure resources                                                                     | Manage access to Microsoft Entra resources                                                                                                            |
+| Scope can be specified at multiple levels (management group, subscription, resource group, resource) | Scope can be specified at the tenant level (organization-wide), administrative unit, or on an individual object (for example, a specific application) |
+
+|Role information can be accessed in Azure portal, Azure CLI, Azure PowerShell, Azure Resource Manager templates, REST API | Role information can be accessed in the Azure admin portal, Microsoft 365 admin center, Microsoft Graph, AzureAD PowerShell |
+
+### Best practices
+
+- Limit the number of subscription owners
+- Assign roles to groups, not users
+  - To make role assignments more manageable, avoid assigning roles directly to users. Instead, assign roles to groups. Assigning roles to groups instead of users also helps minimize the number of role assignments, which has a limit of role assignments per subscription.
+- Assign roles using the unique role ID instead of the role name
+- Avoid using a wildcard when creating custom roles
+  - When creating custom roles, you can use the wildcard (\*) character to define permissions. It's recommended that you specify `Actions` and `DataActions` explicitly instead of using the wildcard (\*) character.
+- Only grant the access users need
+
+  - Use the principle of least privilege to grant users only the access they need to perform their jobs. For example, if a user only needs to view resources, grant them the Reader role instead of the Contributor role.
+  - Use built-in roles when possible. Built-in roles are reviewed and updated by Microsoft, so you don't have to worry about updating them when new features are added to Azure.
+
+  The following diagram shows a suggested pattern for using Azure RBAC
+
+![](images/rbac/azure-rbac-least-privilege.png)
 
 </details>
 
@@ -755,6 +850,8 @@ https://microsoft.github.io/AzureTipsAndTricks/
 
 [The Developer's Guide to Azure](https://azure.microsoft.com/en-us/campaigns/developer-guide/)
 
+[Azure Study Guides](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104)
+
 ## Powershell Gallery
 
 [PowerShell Gallery](https://www.powershellgallery.com/profiles/azure-sdk/)
@@ -767,6 +864,8 @@ https://github.com/kristofferandreasen/awesome-azure
 
 <details>
 <summary><i>Azure vs AWS</i></summary>
+
+https://learn.microsoft.com/en-us/azure/architecture/aws-professional/services
 
 | Azure                                | AWS                                                              |
 | ------------------------------------ | ---------------------------------------------------------------- |
@@ -801,7 +900,8 @@ https://github.com/kristofferandreasen/awesome-azure
 | --------------------------------     | -------------------------------                                  |
 | Azure Web Application Firewall(WAF)  | AWS Web Application Firewall(WAF)                                |
 | Azure Monitor                        | CloudWatch                                                       |
-| Azure Active Directory               | AWS IAM                                                          |
+| Microsoft EntraID                    | AWS IAM                                                          |
+| Microsoft Entra External ID          | AWS Cognito                                                      |
 | --------------------------------     | -------------------------------                                  |
 | Azure Load Balancer                  | Elastic Load Balancer(ELB)                                       |
 | Application Gateway                  | AWS Application Load Balancer                                    |
