@@ -7,6 +7,8 @@ Azure Active Directory (Azure AD), now known as `Microsoft Entra ID`, is an iden
 
 Microsoft Entra ID is a cloud-based identity and access management`(IAM)` service that enables your employees access external resources. Example resources include Microsoft 365, the Azure portal, and thousands of other SaaS applications.
 
+![](images/ad/ms_entraid.avif)
+
 Azure Active Directory (Azure AD) is Microsoft's cloud-based identity and access management service, which helps your employees sign in and access resources in:
 
 - External resources, such as Microsoft 365, the Azure portal, and thousands of other SaaS applications.
@@ -74,7 +76,7 @@ For Larger organisations, one of the largest barriers to full cloud adaptation i
 
 Older applications are unable to use the latest authentication methods, such as OAuth2.0 are not able properly integrate or authentocate with Azure AD.
 
-These legacy applications requires a tradional Active Directory Domain Services (AD DS) management / protocols which includes a classic Active directory features such as domain join, group policy, LDAP, and Kerberos/NTLM authentication.
+These legacy applications requires a traditional Active Directory Domain Services (AD DS) management / protocols which includes a classic Active directory features such as domain join, group policy, LDAP, and Kerberos/NTLM authentication.
 
 How to solve this problem?
 
@@ -183,7 +185,7 @@ A logical container into which Azure resources like web apps, databases, and sto
 
 ![](images/azure-rg.png)
 
-- Resource grouops itself need to be created in a region. This is called the `Resource Group Region`. This is the region where the metadata for the resource group is stored. This is also the region where the resource group's logs are stored.
+- Resource groups itself need to be created in a region. This is called the `Resource Group Region`. This is the region where the metadata for the resource group is stored. This is also the region where the resource group's logs are stored.
 
 - Resource group region is not the same as the resource region.
 
@@ -336,7 +338,6 @@ Microsoft Entra roles are the roles that are used to manage Azure AD resources. 
 | Custom roles                                                                                         | Custom roles                                                                                                                                          |
 | Manage access to Azure resources                                                                     | Manage access to Microsoft Entra resources                                                                                                            |
 | Scope can be specified at multiple levels (management group, subscription, resource group, resource) | Scope can be specified at the tenant level (organization-wide), administrative unit, or on an individual object (for example, a specific application) |
-
 |Role information can be accessed in Azure portal, Azure CLI, Azure PowerShell, Azure Resource Manager templates, REST API | Role information can be accessed in the Azure admin portal, Microsoft 365 admin center, Microsoft Graph, AzureAD PowerShell |
 
 ### Best practices
