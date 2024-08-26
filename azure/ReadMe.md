@@ -332,13 +332,13 @@ Microsoft Entra roles are the roles that are used to manage Azure AD resources. 
 
 ![](images/rbac/azure-rbac-vs-entra-roles.png)
 
-| Azure RBAC Roles                                                                                     | Microsoft Entra Roles                                                                                                                                 |
-| ---------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Built-in roles                                                                                       | Built-in roles                                                                                                                                        |
-| Custom roles                                                                                         | Custom roles                                                                                                                                          |
-| Manage access to Azure resources                                                                     | Manage access to Microsoft Entra resources                                                                                                            |
-| Scope can be specified at multiple levels (management group, subscription, resource group, resource) | Scope can be specified at the tenant level (organization-wide), administrative unit, or on an individual object (for example, a specific application) |
-|Role information can be accessed in Azure portal, Azure CLI, Azure PowerShell, Azure Resource Manager templates, REST API | Role information can be accessed in the Azure admin portal, Microsoft 365 admin center, Microsoft Graph, AzureAD PowerShell |
+| Azure RBAC Roles                                                                                                          | Microsoft Entra Roles                                                                                                                                 |
+| ------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Built-in roles                                                                                                            | Built-in roles                                                                                                                                        |
+| Custom roles                                                                                                              | Custom roles                                                                                                                                          |
+| Manage access to Azure resources                                                                                          | Manage access to Microsoft Entra resources                                                                                                            |
+| Scope can be specified at multiple levels (management group, subscription, resource group, resource)                      | Scope can be specified at the tenant level (organization-wide), administrative unit, or on an individual object (for example, a specific application) |
+| Role information can be accessed in Azure portal, Azure CLI, Azure PowerShell, Azure Resource Manager templates, REST API | Role information can be accessed in the Azure admin portal, Microsoft 365 admin center, Microsoft Graph, AzureAD PowerShell                           |
 
 ### Best practices
 
@@ -922,3 +922,13 @@ https://learn.microsoft.com/en-us/azure/architecture/aws-professional/services
 | --------------------------------     | -------------------------------                                  |
 
 </details>
+
+### Technology choices for Azure solutions
+
+https://learn.microsoft.com/en-us/azure/architecture/guide/technology-choices/technology-choices-overview
+
+### Choose an Azure compute service
+
+https://learn.microsoft.com/en-us/azure/architecture/guide/technology-choices/compute-decision-tree
+
+![](./images/compute/azure-compute-choices.svg)
