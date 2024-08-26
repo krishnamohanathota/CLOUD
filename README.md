@@ -33,3 +33,9 @@ With cloud-native development, updates and new functionality can be pushed live 
 ## SLA Calculation
 
 https://uptime.is/
+
+## How to create a VPN between Azure and AWS
+
+https://techcommunity.microsoft.com/t5/fasttrack-for-azure/how-to-create-a-vpn-between-azure-and-aws-using-only-managed/ba-p/2281900
+
+[VPN-Azure-AWS](./images/aws-azure-vpn/VPN-Azure-AWS.pdf)
