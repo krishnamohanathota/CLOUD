@@ -579,6 +579,18 @@ Azure always maintains multiple copies of your data. The number of copies is bas
 ![](images/data-storage/azure-datastorage-ra-grs.png)
 ![](images/data-storage/azure-data-redundancy-gzrs.png)
 
+**References**
+
+https://techcommunity.microsoft.com/t5/azure-storage-blog/understanding-azure-storage-redundancy-offerings/ba-p/1431700
+
+- [azure-storage-redundancy](./images/data-storage/azure-storage-redundancy.pdf)
+
+https://aka.ms/storageredundancy
+
+https://aka.ms/accountfailover
+
+https://aka.ms/storagehadesign
+
 </details>
 
 <details>
